@@ -18,9 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     // Para llamar la tabla profesionales de la base de datos
-    if (isset($_GET['id_profesional '])) {
+    if (isset($_GET['id_profesional'])) {
 
-        $idpro = $_GET['id_profesional '];
+        $idpro = $_GET['id_profesional'];
 
         $sentencia = $conexion->prepare("SELECT * FROM profesionales WHERE id_profesional LIKE CONCAT(?)");
 
@@ -44,14 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         
         $sentencia->close();
 
-    // Si se proporciona la identificacion en la URL
-    }elseif (isset($_GET['id_login'])) {
+    // Si se proporciona la profesional en la URL
+    }elseif (isset($_GET['nombre_profesional'])) {
 
-        $idlog = $_GET['id_login'];
+        $nompro = $_GET['nombre_profesional'];
 
-        $sentencia = $conexion->prepare("SELECT * FROM pacientes WHERE id_login LIKE CONCAT(?,'%')");
+        $sentencia = $conexion->prepare("SELECT * FROM profesionales WHERE nombre_profesional LIKE CONCAT(?,'%')");
 
-        $sentencia->bind_param('i', $idlog);
+        $sentencia->bind_param('s', $nompro);
 
         $sentencia->execute();
 
@@ -65,19 +65,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         } else {
 
-            echo json_encode(['error' => 'No se encontro la identificacion.'], JSON_UNESCAPED_UNICODE);
+            echo json_encode(['error' => 'No se encontro la profesional.'], JSON_UNESCAPED_UNICODE);
         }
 
         $sentencia->close();
 
-    // Si se proporciona un nombre en la URL
-    }elseif (isset($_GET['nombre_completo'])) {
+    // Si se proporciona un numero en la URL
+    }elseif (isset($_GET['numero_licencia'])) {
 
-        $nomco = $_GET['nombre_completo'];
+        $numli = $_GET['numero_licencia'];
 
-        $sentencia = $conexion->prepare("SELECT * FROM pacientes WHERE nombre_completo LIKE CONCAT(?,'%')");
+        $sentencia = $conexion->prepare("SELECT * FROM profesionales WHERE numero_licencia LIKE CONCAT(?,'%')");
 
-        $sentencia->bind_param('s', $nomco);
+        $sentencia->bind_param('s', $numli);
 
         $sentencia->execute();
 
@@ -91,19 +91,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         } else {
 
-            echo json_encode(['error' => 'No se encontro este usuario.'], JSON_UNESCAPED_UNICODE);
+            echo json_encode(['error' => 'No se encontro este numero de licencia.'], JSON_UNESCAPED_UNICODE);
         }
 
         $sentencia->close();
     
-    // Si se proporciona un sexo en la URL
-    }elseif (isset($_GET['sexo_biologico'])) {
+    // Si se proporciona esta especialidad en la URL
+    }elseif (isset($_GET['especialidad'])) {
 
-        $sexo = $_GET['sexo_biologico'];
+        $esp= $_GET['especialidad'];
 
-        $sentencia = $conexion->prepare("SELECT * FROM pacientes WHERE sexo_biologico LIKE CONCAT(?,'%')");
+        $sentencia = $conexion->prepare("SELECT * FROM profesionales WHERE especialidad LIKE CONCAT(?,'%')");
 
-        $sentencia->bind_param('s', $sexo);
+        $sentencia->bind_param('s', $esp);
 
         $sentencia->execute();
 
@@ -117,19 +117,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         } else {
 
-            echo json_encode(['error' => 'No se encontro el genero del paciente.'], JSON_UNESCAPED_UNICODE);
+            echo json_encode(['error' => 'No se encontro el esta especialidad.'], JSON_UNESCAPED_UNICODE);
         }
 
         $sentencia->close();
 
     // Si se proporciona un direccion en la URL
-    }elseif (isset($_GET['direccion'])) {
+    }elseif (isset($_GET['telefono'])) {
 
-        $dir = $_GET['direccion'];
+        $tel = $_GET['telefono'];
 
-        $sentencia = $conexion->prepare("SELECT * FROM pacientes WHERE direccion LIKE CONCAT(?,'%')");
+        $sentencia = $conexion->prepare("SELECT * FROM profesionales WHERE telefono LIKE CONCAT(?,'%')");
 
-        $sentencia->bind_param('s', $dir);
+        $sentencia->bind_param('s', $tel);
 
         $sentencia->execute();
 
@@ -148,38 +148,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         $sentencia->close();
 
-    // Si se proporciona el numero en la URL
-    }elseif (isset($_GET['numero_celular'])) {
 
-        $cel = $_GET['numero_celular'];
-
-        $sentencia = $conexion->prepare("SELECT * FROM pacientes WHERE numero_celular LIKE CONCAT(?,'%')");
-
-        $sentencia->bind_param('s', $cel);
-
-        $sentencia->execute();
-
-        $resultado = $sentencia->get_result();
-
-        if ($resultado->num_rows > 0) {
-
-            $fila = $resultado->fetch_all(MYSQLI_ASSOC);
-
-            echo json_encode(['data' => $fila], JSON_UNESCAPED_UNICODE);
-
-        } else {
-
-            echo json_encode(['error' => 'No se encontro el numero celular.'], JSON_UNESCAPED_UNICODE);
-        }
-
-        $sentencia->close();
-      
-    // Si se proporciona el correo electronico en la URL
+        // Si se proporciona el correo electronico en la URL
     }elseif (isset($_GET['correo_electronico'])) {
 
         $correo = $_GET['correo_electronico'];
 
-        $sentencia = $conexion->prepare("SELECT * FROM pacientes WHERE correo_electronico LIKE CONCAT(?,'%')");
+        $sentencia = $conexion->prepare("SELECT * FROM profesionales WHERE correo_electronico LIKE CONCAT(?,'%')");
 
         $sentencia->bind_param('s', $correo);
 
@@ -204,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Si no se proporciona ningun parametro en la URL
     }else {
 
-        $resultado = $conexion->query("SELECT * FROM pacientes");
+        $resultado = $conexion->query("SELECT * FROM profesionales");
 
         if ($resultado->num_rows > 0) {
 
@@ -232,15 +207,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ) {
         
         // Obtener datos desde la solicitud POST
-        $nomco = $_POST['t1'];
-        $sexo = $_POST['t2']; 
-        $dir = $_POST['t3'];
-        $cel = $_POST['t4'];
+        $nompro = $_POST['t1'];
+        $numli = $_POST['t2']; 
+        $esp = $_POST['t3'];
+        $tel = $_POST['t4'];
         $correo = $_POST['t5'];
 
         // Evitar SQL Injection usando consultas preparadas
-        $sentencia = $conexion->prepare("INSERT INTO pacientes (id_login, nombre_completo	, sexo_biologico, direccion, numero_celular, correo_electronico) VALUES (?, ?, ?, ?, ?, ?)");
-        $sentencia->bind_param('isssss', $idlog, $nomco, $sexo, $dir, $cel,  $correo);
+        $sentencia = $conexion->prepare("INSERT INTO profesionales ( nombre_profesional, numero_licencia, especialidad, telefono, correo_electronico) VALUES (?, ?, ?, ?, ?)");
+        $sentencia->bind_param('isssss', $nompro, $numli, $esp, $tel,  $correo);
 
         // Ejecutar la consulta
         if ($sentencia->execute()) {
@@ -268,22 +243,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
         isset($_PUT['t3']) &&
         isset($_PUT['t4']) &&
         isset($_PUT['t5']) &&
-        isset($_PUT['t6']) &&
-        isset($_PUT['t7'])
+        isset($_PUT['t6']) 
     ) {
         
         // Obtener datos desde la solicitud POST
-        $idpa = $_PUT['t1'];
-        $idlog = $_PUT['t2'];
-        $nomco = $_PUT['t3'];
-        $sexo= $_PUT['t4'];
-        $dir = $_PUT['t5'];
-        $cel = $_PUT['t6'];
-        $correo =$_PUT['t7'];
+        $idpro = $_PUT['t1'];
+        $nompro = $_PUT['t2'];
+        $numli = $_PUT['t3'];
+        $esp= $_PUT['t4'];
+        $tel= $_PUT['t5'];
+        $correo =$_PUT['t6'];
         
         // Evitar SQL Injection usando consultas preparadas
-        $sentencia = $conexion->prepare("UPDATE pacientes SET id_login=?, nombre_completo=?, sexo_biologico=?, direccion=?, numero_celular=?, correo_electronico=? WHERE id_paciente=?");
-        $sentencia->bind_param('isssssi', $idlog, $nomco, $sexo, $dir, $cel,  $correo, $idpa);
+        $sentencia = $conexion->prepare("UPDATE profesionales SET nombre_profesional=?, numero_licencia=?, especialidad=?, telefono=?, correo_electronico=? WHERE id_profesional=?");
+        $sentencia->bind_param('sssssi', $nompro, $numli, $esp, $tel,  $correo, $idpro);
 
         // Ejecutar la consulta
         if ($sentencia->execute()) {
@@ -306,19 +279,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     parse_str(file_get_contents("php://input"), $_DELETE); 
     // Verificar si los campos estan presentes
     if (
-        isset($_DELETE['id_paciente']) 
+        isset($_DELETE['id_profesional']) 
     ) {
         
         // Obtener datos desde la solicitud POST
-        $idpa = $_DELETE['id_paciente'];
+        $idpro = $_DELETE['id_profesional'];
         
         // Evitar SQL Injection usando consultas preparadas
-        $sentencia = $conexion->prepare("DELETE FROM pacientes  WHERE id_paciente=?");
-        $sentencia->bind_param('i', $idpa);
+        $sentencia = $conexion->prepare("DELETE FROM profesionales  WHERE id_profesional=?");
+        $sentencia->bind_param('i', $idpro);
 
         // Ejecutar la consulta
         if ($sentencia->execute()) {
-            echo json_encode(['message' => 'paciente eliminado con exito.'], JSON_UNESCAPED_UNICODE);
+            echo json_encode(['message' => 'profesional eliminado con exito.'], JSON_UNESCAPED_UNICODE);
         } else {
             echo json_encode(['error' => 'Error no se pudo eliminar.'], JSON_UNESCAPED_UNICODE);
         }

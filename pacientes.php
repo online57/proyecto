@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         } else {
 
-            echo json_encode(['error' => 'No se encontro el genero del paciente.'], JSON_UNESCAPED_UNICODE);
+            echo json_encode(['error' => 'No se encontro el genero.'], JSON_UNESCAPED_UNICODE);
         }
 
         $sentencia->close();
@@ -228,7 +228,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         isset($_POST['t2']) &&
         isset($_POST['t3']) &&
         isset($_POST['t4']) &&
-        isset($_POST['t5']) 
+        isset($_POST['t5']) &&
+        isset($_POST['t6'])  
     ) {
         
         // Obtener datos desde la solicitud POST
@@ -237,10 +238,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $dir = $_POST['t3'];
         $cel = $_POST['t4'];
         $correo = $_POST['t5'];
+        $idlog = $_POST['t6'];
+       
 
         // Evitar SQL Injection usando consultas preparadas
-        $sentencia = $conexion->prepare("INSERT INTO pacientes (id_login, nombre_completo	, sexo_biologico, direccion, numero_celular, correo_electronico) VALUES (?, ?, ?, ?, ?, ?)");
-        $sentencia->bind_param('isssss', $idlog, $nomco, $sexo, $dir, $cel,  $correo);
+        $sentencia = $conexion->prepare("INSERT INTO pacientes ( nombre_completo, sexo_biologico, direccion, numero_celular, correo_electronico, id_login) VALUES ( ?, ?, ?, ?, ?,?)");
+        $sentencia->bind_param('sssssi', $nomco, $sexo, $dir, $cel,  $correo, $idlog);
 
         // Ejecutar la consulta
         if ($sentencia->execute()) {
@@ -272,7 +275,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
         isset($_PUT['t7'])
     ) {
         
-        // Obtener datos desde la solicitud POST
+        // Obtener datos desde la solicitud PUT
         $idpa = $_PUT['t1'];
         $idlog = $_PUT['t2'];
         $nomco = $_PUT['t3'];

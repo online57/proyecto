@@ -1,0 +1,103 @@
+* {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #00042C;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%; /* Asegurarse de que ocupe el 100% del ancho */
+        }
+        .container {
+            display: flex; /* Cambiado a flex */
+            align-items: stretch; /* Asegurarse de que los elementos ocupen la misma altura */
+            gap: 20px; /* Espacio entre elementos */
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 100%;
+        }
+        .form-section, .logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1; /* Permitir que ambas secciones ocupen el 50% */
+        }
+        .form-section {
+            text-align: center;
+            padding: 20px; /* Espaciado interno */
+        }
+        .form-section h2 {
+            background-color: #0a517e; /* Fondo azul */
+            color: white; /* Texto blanco */
+            font-size: 28px;
+            margin-bottom: 20px;
+            padding: 10px; /* Espacio alrededor del texto */
+            border-radius: 5px; /* Bordes redondeados */
+            text-transform: uppercase; /* Texto en mayúsculas */
+        }
+        .form-section label {
+            font-weight: bold;
+            color: #15218E;
+            margin-bottom: 10px;
+        }
+        .form-section select,
+        .form-section input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .form-section input[type="date"]:hover {
+            border-color: #2C9FE6;
+        }
+        .form-section button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #064064;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px; /* Espacio arriba del botón */
+        }
+        .form-section button:hover {
+            background-color: #15218E;
+        }
+        .form-section input[type="checkbox"] {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        .form-section .auth-box {
+            margin-bottom: 10px; /* Ajuste para el margen */
+            display: flex;
+            align-items: center; /* Alineación vertical del texto y checkbox */
+            justify-content: center; /* Centrar el contenido */
+            font-size: 14px; /* Tamaño de fuente más pequeño */
+            color: black; /* Color negro para el texto de autorización */
+        }
+        .logo-section {
+            position: relative; /* Posicionamiento relativo para la imagen */
+            overflow: hidden; /* Asegura que la imagen no sobresalga */
+        }
+        .logo-section img {
+            left: 100px;
+            border-radius: 10px; /* Bordes redondeados */
+            width: 150%; /* Ocupa el 100% del ancho del contenedor */
+            height: 100%; /* Ocupa toda la altura disponible */
+            object-fit: fill; /* Mantiene la proporción de la imagen */
+        }
+        .separator {
+            border-left: 2px solid #ccc; /* Línea vertical */
+            height: 100%; /* Se extiende a la altura del contenedor */
+            margin: 0 20px; /* Espacio horizontal de la línea */
+        }

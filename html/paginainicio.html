@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital - Inicio</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #00042C;
+            color: white;
+            display: flex;
+            height: 100vh;
+            width: 100%;
+        }
+        .menu {
+            width: 250px;
+            background-color: #064064;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            height: 100%;
+            gap: 30px;
+        }
+        .menu a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .menu a:hover {
+            background-color: #0a517e;
+        }
+        .menu a img {
+            margin-right: 10px;
+            width: 24px;
+            height: 24px;
+        }
+        .container {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #0a517e;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .header h2 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .header button {
+            padding: 10px 20px;
+            background-color: #064064;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .header button:hover {
+            background-color: #15218E;
+        }
+        .content h3 {
+            color: rgb(12, 7, 7);
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        .content label {
+            font-weight: bold;
+            color: #131212;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .content input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #161414;
+            border-radius: 5px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .content input[type="date"] {
+            width: 48%; /* Para ajustar los dos calendarios en la misma línea */
+        }
+        .content .date-range {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Menú lateral -->
+    <div class="menu">
+        <a href="#">
+            <img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" alt="Inicio">
+            Inicio
+        </a>
+        <a href="#">
+            <img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="Perfil de usuario">
+            Perfil de usuario
+        </a>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <!-- Cabecera con nombre del paciente y botón de cerrar sesión -->
+        <div class="header">
+            <h2>Nombre del Pacientooooo</h2>
+            <button>Cerrar Sesión</button>
+        </div>
+
+        <!-- Contenido de la página -->
+        <div class="content">
+            <h3>Órdenes de Laboratorio</h3>
+            <h1>hola</h1>
+            
+            <!-- Campo de Número de Orden -->
+            <label for="numero-orden">Número de Orden (solo números)</label>
+            <input type="number" id="numero-orden" name="numero-orden" placeholder="Ingrese el número de la orden">
+
+            <!-- Campos de Rango de Fechas -->
+            <div class="date-range">
+                <div>
+                    <label for="fecha-inicio">Fecha Desde</label>
+                    <input type="date" id="fecha-inicio" name="fecha-inicio">
+                </div>
+                <div>
+                    <label for="fecha-fin">Fecha Hasta</label>
+                    <input type="date" id="fecha-fin" name="fecha-fin">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

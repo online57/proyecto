@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital - Página de Inicio</title>
+    <!-- Aquí está la corrección: rel="stylesheet" -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <div class="container">
+        <!-- Sección del formulario -->
+        <div class="form-section" id="" me>
+            <h2>Consulta tu información</h2>
+            <form>
+                <label for="tipo-documento">Tipo de Documento</label>
+                <select id="tipo-documento" name="tipo-documento">
+                    <option value="dni">tarjeta de identidad</option>
+                    <option value="pasaporte">Pasaporte</option>
+                    <option value="cedula">Cédula de ciudadania</option>
+                    <option value="cedula">Cédula de extranjería</option>
+                </select>
+
+                <label for="numero-documento">Número de Documento</label>
+                <input type="text" id="numero-documento" name="numero-documento" placeholder="Ingrese su número de documento">
+
+                <label for="fecha-nacimiento">Fecha de Nacimiento</label>
+                <input type="date" id="fecha-nacimiento" name="fecha-nacimiento">
+
+                <div class="auth-box">
+                    <label for="autorizacion"> Autorizo el manejo de mis datos personales
+                    <input type="checkbox" id="autorizacion" name="autorizacion"> 
+                    </label>
+                </div>
+
+                <div class="submit-button">
+                    <button type="submit">Enviar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Separador -->
+        <div class="separator"></div>
+
+        <!-- Sección del logo -->
+        <div class="logo-section" style="margin-left: auto;"> <!-- Alineación a la derecha -->
+            <img src="https://www.ecoavant.com/uploads/s1/29/22/70/imagen-que-es-la-salud.webp" alt="Logo del Hospital">
+        </div>
+    </div>
+
+</body>
+</html>

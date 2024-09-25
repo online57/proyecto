@@ -20,4 +20,10 @@ if($conexion->connect_errno){
     echo "problemas de conexion";
 }
 
+// Aquí se obtiene el nombre del paciente desde la base de datos, se pasa a la pagina de inicio del html para mostrar el nombre
+include 'conexion.php';
+$resultado = mysqli_query($conn, "SELECT nombre_completo FROM pacientes WHERE id_paciente = 1"); // Cambia este ID según el paciente
+$paciente = mysqli_fetch_assoc($resultado);
+echo $paciente['nombre_completo'];
+
 ?>
